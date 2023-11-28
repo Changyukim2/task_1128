@@ -66,19 +66,26 @@ int remove_zero_vertex(GraphType* g) {
 
 int topo_sort(GraphType* g) {
     int index;
+
     while ((index = remove_zero_vertex(g)) != -1) {
         printf("Á¤Á¡ %d -> ", index);
     }
 
-  
     for (int i = 0; i < g->n; i++) {
-        if (!removed[i]) {
-            return (FALSE);
+        if (in_degree[i] != 0) {
+            return FALSE;
         }
     }
 
-    return (TRUE);
+    for (int i = 0; i < g->n; i++) {
+        if (removed[i] != 1) {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
 }
+
 
 int main(void) {
     GraphType g;
